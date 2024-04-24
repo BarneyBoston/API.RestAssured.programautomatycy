@@ -1,0 +1,596 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Program Automatycy API",
+    "description": "Kursy dla tester&oacute;w",
+    "version": "5.9.9",
+    "contact": {
+      "email": "admin@programautomatycy.pl"
+    }
+  },
+  "host": "programautomatycy.pl",
+  "basePath": "\/wp-json",
+  "tags": [],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "\/cocart\/v1\/get-cart": {
+      "get": {
+        "tags": [
+          "get-cart"
+        ],
+        "summary": "",
+        "description": "",
+        "consumes": [
+          "application\/x-www-form-urlencoded",
+          "multipart\/form-data"
+        ],
+        "produces": [
+          "application\/json"
+        ],
+        "parameters": [
+          {
+            "name": "cart_key",
+            "in": "query",
+            "description": "Unique identifier for the cart\/customer.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "thumb",
+            "in": "query",
+            "description": "Returns the URL of the product image thumbnail.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "\/cocart\/v1\/get-cart\/{id}": {
+      "get": {
+        "tags": [
+          "get-cart"
+        ],
+        "summary": "",
+        "description": "",
+        "consumes": [
+          "application\/x-www-form-urlencoded",
+          "multipart\/form-data"
+        ],
+        "produces": [
+          "application\/json"
+        ],
+        "parameters": [
+          {
+            "name": "cart_key",
+            "in": "query",
+            "description": "Unique identifier for the cart\/customer.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "thumb",
+            "in": "query",
+            "description": "Returns the URL of the product image thumbnail.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "\/cocart\/v1\/get-cart\/customer\/{id}": {
+      "get": {
+        "tags": [
+          "get-cart"
+        ],
+        "summary": "",
+        "description": "",
+        "consumes": [
+          "application\/x-www-form-urlencoded",
+          "multipart\/form-data"
+        ],
+        "produces": [
+          "application\/json"
+        ],
+        "parameters": [
+          {
+            "name": "cart_key",
+            "in": "query",
+            "description": "Unique identifier for the cart\/customer.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "thumb",
+            "in": "query",
+            "description": "Returns the URL of the product image thumbnail.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "\/cocart\/v1\/add-item": {
+      "post": {
+        "tags": [
+          "add-item"
+        ],
+        "summary": "",
+        "description": "",
+        "consumes": [
+          "application\/x-www-form-urlencoded",
+          "multipart\/form-data"
+        ],
+        "produces": [
+          "application\/json"
+        ],
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "formData",
+            "description": "Unique identifier for the product.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "quantity",
+            "in": "formData",
+            "description": "The quantity amount of the item to add to cart.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "variation_id",
+            "in": "formData",
+            "description": "Unique identifier for the variation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "variation",
+            "in": "formData",
+            "description": "The variation attributes that identity the variation of the item.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cart_item_data",
+            "in": "formData",
+            "description": "Additional item data passed to make item unique.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "return_cart",
+            "in": "formData",
+            "description": "Returns the cart once item is added.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "\/cocart\/v1\/calculate": {
+      "post": {
+        "tags": [
+          "calculate"
+        ],
+        "summary": "",
+        "description": "",
+        "consumes": [
+          "application\/x-www-form-urlencoded",
+          "multipart\/form-data"
+        ],
+        "produces": [
+          "application\/json"
+        ],
+        "parameters": [
+          {
+            "name": "return",
+            "in": "formData",
+            "description": "Returns the cart totals once calculated.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "\/cocart\/v1\/clear": {
+      "post": {
+        "tags": [
+          "clear"
+        ],
+        "summary": "",
+        "description": "",
+        "consumes": [
+          "application\/x-www-form-urlencoded",
+          "multipart\/form-data"
+        ],
+        "produces": [
+          "application\/json"
+        ],
+        "parameters": [],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "\/cocart\/v1\/count-items": {
+      "get": {
+        "tags": [
+          "count-items"
+        ],
+        "summary": "",
+        "description": "",
+        "consumes": [
+          "application\/x-www-form-urlencoded",
+          "multipart\/form-data"
+        ],
+        "produces": [
+          "application\/json"
+        ],
+        "parameters": [
+          {
+            "name": "return",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "\/cocart\/v1\/item": {
+      "get": {
+        "tags": [
+          "item"
+        ],
+        "summary": "",
+        "description": "",
+        "consumes": [
+          "application\/x-www-form-urlencoded",
+          "multipart\/form-data"
+        ],
+        "produces": [
+          "application\/json"
+        ],
+        "parameters": [
+          {
+            "name": "cart_item_key",
+            "in": "query",
+            "description": "Unique identifier for the item in the cart.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "return_cart",
+            "in": "query",
+            "description": "Returns the whole cart to reduce API requests.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "item"
+        ],
+        "summary": "",
+        "description": "",
+        "consumes": [
+          "application\/x-www-form-urlencoded",
+          "multipart\/form-data"
+        ],
+        "produces": [
+          "application\/json"
+        ],
+        "parameters": [
+          {
+            "name": "cart_item_key",
+            "in": "formData",
+            "description": "Unique identifier for the item in the cart.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "return_cart",
+            "in": "formData",
+            "description": "Returns the whole cart to reduce API requests.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "quantity",
+            "in": "formData",
+            "description": "",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "item"
+        ],
+        "summary": "",
+        "description": "",
+        "consumes": [
+          "application\/x-www-form-urlencoded",
+          "multipart\/form-data"
+        ],
+        "produces": [
+          "application\/json"
+        ],
+        "parameters": [
+          {
+            "name": "cart_item_key",
+            "in": "query",
+            "description": "Unique identifier for the item in the cart.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "return_cart",
+            "in": "query",
+            "description": "Returns the whole cart to reduce API requests.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "\/cocart\/v1\/logout": {
+      "post": {
+        "tags": [
+          "logout"
+        ],
+        "summary": "",
+        "description": "",
+        "consumes": [
+          "application\/x-www-form-urlencoded",
+          "multipart\/form-data"
+        ],
+        "produces": [
+          "application\/json"
+        ],
+        "parameters": [],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "\/cocart\/v1\/totals": {
+      "get": {
+        "tags": [
+          "totals"
+        ],
+        "summary": "",
+        "description": "",
+        "consumes": [
+          "application\/x-www-form-urlencoded",
+          "multipart\/form-data"
+        ],
+        "produces": [
+          "application\/json"
+        ],
+        "parameters": [
+          {
+            "name": "html",
+            "in": "query",
+            "description": "Returns the totals pre-formatted.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "basic": {
+      "type": "basic"
+    }
+  }
+}
