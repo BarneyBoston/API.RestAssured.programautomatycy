@@ -6,7 +6,10 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class AddItemRequest {
-    Integer quantity;
-    Integer product_id;
-    Boolean return_cart;
+    private String quantity;
+    private Integer product_id;
+    private Boolean return_cart;
+
+    public AddItemRequest() {
+    }
 }

@@ -11,4 +11,13 @@ public class GetCartControllerTests extends BaseRestTest {
 
         ResponseAssert.assertThat(response).statusCodeIs(200);
     }
+    @Test
+    public void getCartIdResponse() {
+        var response = controller.getCart();
+        String id = response.getCookie("woocommerce_cart_hash");
+
+        var response2 = controller.getCartId(id);
+
+        ResponseAssert.assertThat(response2).statusCodeIs(200);
+    }
 }
