@@ -1,23 +1,28 @@
 package pl.programautomatycy.cart.service.test.getcart;
 
-import org.testng.annotations.Test;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import pl.programautomatycy.api.utils.ResponseAssert;
 import pl.programautomatycy.cart.service.test.BaseRestTest;
 
 public class GetCartControllerTests extends BaseRestTest {
-    @Test
+
+    @When("Get Cart Response")
     public void getCartResponse() {
-        var response = controller.getCart();
-
-        ResponseAssert.assertThat(response).statusCodeIs(200);
+        response = controller.getCart();
     }
-    @Test
+
+    @When("Get Cart Id Response")
     public void getCartIdResponse() {
-        var response = controller.getCart();
-        String id = response.getCookie("woocommerce_cart_hash");
+        var response1 = controller.getCart();
+        String id = response1.getCookie("woocommerce_cart_hash");
 
-        var response2 = controller.getCartId(id);
+        response = controller.getCartId(id);
 
-        ResponseAssert.assertThat(response2).statusCodeIs(200);
+    }
+
+    @Then("Assert that get cart response code is {int}")
+    public void assertThatResponseCodeIs(Integer responseCode) {
+        ResponseAssert.assertThat(response).statusCodeIs(responseCode);
     }
 }

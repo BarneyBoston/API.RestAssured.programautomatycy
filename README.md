@@ -1,6 +1,7 @@
 # PROGRAMAUTOMATYCY.API.RESTASSURED
 
 This is a Java & RestAssured testing framework.\
+It is a BDD project - with Cucumber implemented for tests management and clarity.\
 Its purpose is to validate correctness of implemented communication between backend & frontend of application.
 
 ## Installation
@@ -45,7 +46,9 @@ mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng.xml
 
 ## Usage
 
-If the project will be developed further, specify which test classes should be run within testng.xml file.
+If the project will be developed further, specify which test classes should be run within:
+
+/src/test/java/**TestNgRunner** class - under feature within **@CucumberOptions** annotation
 
 
 ## Contributing

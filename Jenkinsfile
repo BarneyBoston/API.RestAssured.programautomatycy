@@ -21,14 +21,14 @@ pipeline {
         stage('DryRun') {
             steps {
                 sh """
-                    mvn test -Dtestng.mode.dryrun=true -Dsurefire.suiteXmlFiles=src/test/resources/testng.xml
+                    mvn test -Dtestng.mode.dryrun=true -Dcucumber.features=src/test/resources/cucumber.feature
                 """
             }
         }
         stage('Test') {
             steps {
                 sh """
-                    mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng.xml
+                    mvn test Dcucumber.features=src/test/resources/scenarios
                 """
             }
         }
