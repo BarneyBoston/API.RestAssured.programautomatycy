@@ -18,13 +18,6 @@ pipeline {
                 """
             }
         }
-        stage('DryRun') {
-            steps {
-                sh """
-                    mvn test -Dtestng.mode.dryrun=true -Dsurefire.suiteXmlFiles=src/test/resources/testng.xml
-                """
-            }
-        }
         stage('Test') {
             steps {
                 sh """

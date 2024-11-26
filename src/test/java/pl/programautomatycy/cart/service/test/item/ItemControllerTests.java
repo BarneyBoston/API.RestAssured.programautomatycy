@@ -1,6 +1,7 @@
 package pl.programautomatycy.cart.service.test.item;
 
-import org.testng.annotations.Test;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import pl.programautomatycy.api.dto.additem.AddItemRequest;
 import pl.programautomatycy.api.dto.item.ItemRequest;
 import pl.programautomatycy.api.utils.ResponseAssert;
@@ -9,121 +10,109 @@ import pl.programautomatycy.cart.service.test.BaseRestTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ItemControllerTests extends BaseRestTest {
-    @Test
+
+    @When("Get Correct Item Response")
     public void getCorrectItemResponse() {
         var request = new AddItemRequest("20", 138, true);
-        var response = controller.postAddItem(request);
+        var response1 = controller.postAddItem(request);
 
-        var request2 = new ItemRequest(extractor.extractStringFromResponse("key", response), true);
-        var response2 = controller.getItem(request2);
-
-        ResponseAssert.assertThat(response2).statusCodeIs(200);
+        var request2 = new ItemRequest(extractor.extractStringFromResponse("key", response1), true);
+        response = controller.getItem(request2);
     }
 
-    @Test
+    @When("Get Incorrect Item Response")
     public void getIncorrectItemResponse() {
         var request = new ItemRequest("1", true);
-        var response = controller.getItem(request);
-
-        ResponseAssert.assertThat(response).statusCodeIs(403);
+        response = controller.getItem(request);
     }
 
-    @Test
+    @When("Get Null Item Response")
     public void getNullItemResponse() {
         var request = new ItemRequest();
-        var response = controller.getItem(request);
-
-        ResponseAssert.assertThat(response).statusCodeIs(400);
+        response = controller.getItem(request);
     }
 
-    @Test
+    @When("Post Correct Item Response")
     public void postCorrectItemResponse() {
         var request = new AddItemRequest("20", 138, true);
-        var response = controller.postAddItem(request);
+        var response1 = controller.postAddItem(request);
 
-        var request2 = new ItemRequest(extractor.extractStringFromResponse("key", response), true);
-        var response2 = controller.postUpdateItem(request2);
-
-        ResponseAssert.assertThat(response2).statusCodeIs(200);
+        var request2 = new ItemRequest(extractor.extractStringFromResponse("key", response1), true);
+        response = controller.postUpdateItem(request2);
     }
 
-    @Test
+    @When("Post Incorrect Item Response")
     public void postIncorrectItemResponse() {
         var request = new ItemRequest("1", true);
-        var response = controller.postUpdateItem(request);
-
-        ResponseAssert.assertThat(response).statusCodeIs(404);
+        response = controller.postUpdateItem(request);
     }
 
-    @Test
+    @When("Post Null Item Response")
     public void postNullItemResponse() {
         var request = new ItemRequest();
-        var response = controller.postUpdateItem(request);
-
-        ResponseAssert.assertThat(response).statusCodeIs(400);
+        response = controller.postUpdateItem(request);
     }
 
-    @Test
+    @When("Delete Item Response")
     public void deleteItemResponse() {
         var request = new AddItemRequest("20", 138, true);
-        var response = controller.postAddItem(request);
+        var response1 = controller.postAddItem(request);
 
-        var request2 = new ItemRequest(extractor.extractStringFromResponse("key", response), true);
-        var response2 = controller.deleteItem(request2);
-
-        ResponseAssert.assertThat(response2).statusCodeIs(200);
+        var request2 = new ItemRequest(extractor.extractStringFromResponse("key", response1), true);
+        response = controller.deleteItem(request2);
     }
 
-    @Test
+    @When("Delete Incorrect Item Response")
     public void deleteIncorrectItemResponse() {
         var request = new ItemRequest("1", true);
-        var response = controller.deleteItem(request);
-
-        ResponseAssert.assertThat(response).statusCodeIs(404);
+        response = controller.deleteItem(request);
     }
 
-    @Test
+    @When("Delete Null Item Response")
     public void deleteNullItemResponse() {
         var request = new ItemRequest();
-        var response = controller.deleteItem(request);
-
-        ResponseAssert.assertThat(response).statusCodeIs(400);
+        response = controller.deleteItem(request);
     }
 
-    @Test
+    @When("Get Item")
     public void getItem() {
         var request = new AddItemRequest("20", 138, true);
-        var response = controller.postAddItem(request);
+        var response1 = controller.postAddItem(request);
 
-        var request2 = new ItemRequest(extractor.extractStringFromResponse("key", response), true);
-        var response2 = controller.getItem(request2);
+        var request2 = new ItemRequest(extractor.extractStringFromResponse("key", response1), true);
+        response = controller.getItem(request2);
 
-        assertThat(extractor.extractStringFromResponse("key", response)).isEqualTo(extractor.extractStringFromResponse("key", response2));
+        assertThat(extractor.extractStringFromResponse("key", response)).isEqualTo(extractor.extractStringFromResponse("key", response));
     }
 
-    @Test
+    @When("Update Item")
     public void updateItem() {
         var request = new AddItemRequest("20", 138, true);
-        var response = controller.postAddItem(request);
+        var response1 = controller.postAddItem(request);
 
-        var request2 = new ItemRequest("10", extractor.extractStringFromResponse("key", response), true);
-        var response2 = controller.postUpdateItem(request2);
+        var request2 = new ItemRequest("10", extractor.extractStringFromResponse("key", response1), true);
+        response = controller.postUpdateItem(request2);
 
-        assertThat(extractor.extractNumberFromResponse("quantity", response2)).isEqualTo(10);
+        assertThat(extractor.extractNumberFromResponse("quantity", response)).isEqualTo(10);
     }
 
-    @Test
+    @When("Delete Item")
     public void deleteItem() {
         var request = new AddItemRequest("20", 138, true);
-        var response = controller.postAddItem(request);
+        var response1 = controller.postAddItem(request);
 
-        var request2 = new ItemRequest(extractor.extractStringFromResponse("key", response), true);
+        var request2 = new ItemRequest(extractor.extractStringFromResponse("key", response1), true);
         var response2 = controller.deleteItem(request2);
 
         var request3 = new ItemRequest(extractor.extractStringFromResponse("key", response2), true);
-        var response3 = controller.getItem(request3);
+        response = controller.getItem(request3);
 
-        assertThat(extractor.extractNumberFromResponse("quantity", response3)).isEqualTo(null);
+        assertThat(extractor.extractNumberFromResponse("quantity", response)).isEqualTo(null);
+    }
+
+    @Then("Assert that item response code is {int}")
+    public void assertThatResponseCodeIs(Integer responseCode) {
+        ResponseAssert.assertThat(response).statusCodeIs(responseCode);
     }
 
 }

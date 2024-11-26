@@ -1,20 +1,20 @@
 package pl.programautomatycy.cart.service.test.totals;
 
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.assertj.core.api.AssertionsForInterfaceTypes;
-import org.testng.annotations.Test;
 import pl.programautomatycy.api.dto.additem.AddItemRequest;
 import pl.programautomatycy.api.utils.ResponseAssert;
 import pl.programautomatycy.cart.service.test.BaseRestTest;
 
 public class TotalsControllerTests extends BaseRestTest {
-    @Test
-    public void getTotalsResponse() {
-        var response = controller.getTotalsResponse();
 
-        ResponseAssert.assertThat(response).statusCodeIs(200);
+    @When("Get Totals Response")
+    public void getTotalsResponse() {
+        response = controller.getTotalsResponse();
     }
 
-    @Test
+    @When("Get Totals")
     public void getTotals() {
         var addItemRequest = new AddItemRequest("1", 140, true);
         var addItemResponse = controller.postAddItem(addItemRequest);
@@ -23,4 +23,10 @@ public class TotalsControllerTests extends BaseRestTest {
 
         AssertionsForInterfaceTypes.assertThat(response.getTotal()).isEqualTo("15.00");
     }
+
+    @Then("Assert that totals response code is {int}")
+    public void assertThatResponseCodeIs(Integer responseCode) {
+        ResponseAssert.assertThat(response).statusCodeIs(responseCode);
+    }
+
 }

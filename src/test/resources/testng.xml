@@ -1,10 +1,8 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="ProgramAutomatycy API RestAssured" parallel="tests" thread-count="2">
-
-    <test name="API Tests">
-        <packages>
-            <package name="pl.programautomatycy.cart.service.test"/>
-        </packages>
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Cucumber Suite">
+    <test name="Cucumber Tests">
+        <classes>
+            <class name="pl.programautomatycy.cart.service.test.TestNgRunner"/>
+        </classes>
     </test>
-
 </suite>
