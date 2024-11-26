@@ -7,5 +7,5 @@ Feature: Calculate Controller API tests
     And Log out user
 
     Examples:
-      | name                       | return_cart | responseCode |
+      | name                  | return_cart | responseCode |
       | postCalculateResponse | true        | 200          |

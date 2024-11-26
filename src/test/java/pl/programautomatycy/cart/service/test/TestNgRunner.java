@@ -12,7 +12,7 @@ import pl.programautomatycy.api.dto.item.ItemRequest;
 import pl.programautomatycy.api.utils.ExtractFromResponse;
 
 @CucumberOptions(
-        features = "src/test/resources/scenarios",
+        features = "src/test/resources/scenarios/AddItemController.feature",
         glue = "pl.programautomatycy.cart.service.test"
 )
 @Guice(modules = ProgramAutomatycyConfiguration.class)

@@ -2,14 +2,12 @@ package pl.programautomatycy.cart.service.test.additem;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.testng.annotations.Guice;
-import pl.programautomatycy.api.configuration.ProgramAutomatycyConfiguration;
 import pl.programautomatycy.api.dto.additem.AddItemRequest;
 import pl.programautomatycy.api.utils.ResponseAssert;
 import pl.programautomatycy.cart.service.test.BaseRestTest;
 
 
-@Guice(modules = ProgramAutomatycyConfiguration.class)
+
 public class AddItemControllerTests extends BaseRestTest {
 
     @When("Post Add Item Request with quantity {string}, product_id {int}, return_cart {string}")
