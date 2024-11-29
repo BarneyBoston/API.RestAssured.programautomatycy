@@ -5,6 +5,7 @@ import io.cucumber.java.en.When;
 import org.assertj.core.api.AssertionsForInterfaceTypes;
 import pl.programautomatycy.api.dto.additem.AddItemRequest;
 import pl.programautomatycy.api.utils.ResponseAssert;
+import pl.programautomatycy.api.utils.TestData;
 import pl.programautomatycy.cart.service.test.BaseRestTest;
 
 public class TotalsControllerTests extends BaseRestTest {
@@ -24,9 +25,9 @@ public class TotalsControllerTests extends BaseRestTest {
         AssertionsForInterfaceTypes.assertThat(response.getTotal()).isEqualTo("15.00");
     }
 
-    @Then("Assert that totals response code is {int}")
-    public void assertThatResponseCodeIs(Integer responseCode) {
-        ResponseAssert.assertThat(response).statusCodeIs(responseCode);
+    @Then("Assert that totals response code is {string}")
+    public void assertThatResponseCodeIs(String scenario) {
+        ResponseAssert.assertThat(response).statusCodeIs(TestData.getExpectedResponseCode(scenario));
     }
 
 }
