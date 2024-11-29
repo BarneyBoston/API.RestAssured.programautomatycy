@@ -5,6 +5,7 @@ import io.cucumber.java.en.When;
 import pl.programautomatycy.api.dto.additem.AddItemRequest;
 import pl.programautomatycy.api.dto.item.ItemRequest;
 import pl.programautomatycy.api.utils.ResponseAssert;
+import pl.programautomatycy.api.utils.TestData;
 import pl.programautomatycy.cart.service.test.BaseRestTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -110,9 +111,9 @@ public class ItemControllerTests extends BaseRestTest {
         assertThat(extractor.extractNumberFromResponse("quantity", response)).isEqualTo(null);
     }
 
-    @Then("Assert that item response code is {int}")
-    public void assertThatResponseCodeIs(Integer responseCode) {
-        ResponseAssert.assertThat(response).statusCodeIs(responseCode);
+    @Then("Assert that item response code is {string}")
+    public void assertThatResponseCodeIs(String scenario) {
+        ResponseAssert.assertThat(response).statusCodeIs(TestData.getExpectedResponseCode(scenario));
     }
 
 }

@@ -3,6 +3,7 @@ package pl.programautomatycy.cart.service.test.getcart;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pl.programautomatycy.api.utils.ResponseAssert;
+import pl.programautomatycy.api.utils.TestData;
 import pl.programautomatycy.cart.service.test.BaseRestTest;
 
 public class GetCartControllerTests extends BaseRestTest {
@@ -21,8 +22,8 @@ public class GetCartControllerTests extends BaseRestTest {
 
     }
 
-    @Then("Assert that get cart response code is {int}")
-    public void assertThatResponseCodeIs(Integer responseCode) {
-        ResponseAssert.assertThat(response).statusCodeIs(responseCode);
+    @Then("Assert that get cart response is {string}")
+    public void assertThatResponseCodeIs(String scenario) {
+        ResponseAssert.assertThat(response).statusCodeIs(TestData.getExpectedResponseCode(scenario));
     }
 }

@@ -8,58 +8,86 @@ import java.util.List;
 import java.util.Map;
 
 public class ExtractFromResponse {
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     public String extractStringFromResponse(String key, Response response) {
         String responseBody = response.getBody().asString();
-        ObjectMapper objectMapper = new ObjectMapper();
-        String valueKey = null;
         try {
-            Map<String, Object> responseMap = objectMapper.readValue(responseBody, Map.class);
-
-            for (Map.Entry<String, Object> entry : responseMap.entrySet()) {
-                Map<String, Object> innerMap = (Map<String, Object>) entry.getValue();
-                valueKey = (String) innerMap.get(key);
-            }
+            Object parsedResponse = objectMapper.readValue(responseBody, Object.class);
+            return extractValue(parsedResponse, key, String.class);
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return valueKey;
     }
+
     public Number extractNumberFromResponse(String key, Response response) {
         String responseBody = response.getBody().asString();
-        ObjectMapper objectMapper = new ObjectMapper();
-        Number valueKey = null;
         try {
-            Map<String, Object> responseMap = objectMapper.readValue(responseBody, Map.class);
-
-            for (Map.Entry<String, Object> entry : responseMap.entrySet()) {
-                Map<String, Object> innerMap = (Map<String, Object>) entry.getValue();
-                valueKey = (Number) innerMap.get(key);
-            }
+            Object parsedResponse = objectMapper.readValue(responseBody, Object.class);
+            return extractValue(parsedResponse, key, Number.class);
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return valueKey;
     }
 
     public List<String> extractValuesFromResponse(Response response, String fieldName) {
         List<String> values = new ArrayList<>();
         String responseBody = response.getBody().asString();
-        ObjectMapper objectMapper = new ObjectMapper();
-
         try {
-            Map<String, Object> responseMap = objectMapper.readValue(responseBody, Map.class);
-
-            for (Map.Entry<String, Object> entry : responseMap.entrySet()) {
-                Map<String, Object> innerMap = (Map<String, Object>) entry.getValue();
-                Object fieldValue = innerMap.get(fieldName);
-                if (fieldValue != null) {
-                    values.add(fieldValue.toString());
-                }
-            }
+            Object parsedResponse = objectMapper.readValue(responseBody, Object.class);
+            extractValuesFromParsedResponse(parsedResponse, fieldName, values);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return values;
+    }
+
+    private <T> T extractValue(Object response, String key, Class<T> valueType) {
+        if (response instanceof Map) {
+            Map<String, Object> map = (Map<String, Object>) response;
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                if (entry.getValue() instanceof Map) {
+                    Object innerValue = ((Map<?, ?>) entry.getValue()).get(key);
+                    if (valueType.isInstance(innerValue)) {
+                        return valueType.cast(innerValue);
+                    }
+                }
+            }
+        } else if (response instanceof List) {
+            for (Object item : (List<?>) response) {
+                if (item instanceof Map) {
+                    Object innerValue = ((Map<?, ?>) item).get(key);
+                    if (valueType.isInstance(innerValue)) {
+                        return valueType.cast(innerValue);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    private void extractValuesFromParsedResponse(Object response, String fieldName, List<String> values) {
+        if (response instanceof Map) {
+            Map<String, Object> map = (Map<String, Object>) response;
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                if (entry.getValue() instanceof Map) {
+                    Object fieldValue = ((Map<?, ?>) entry.getValue()).get(fieldName);
+                    if (fieldValue != null) {
+                        values.add(fieldValue.toString());
+                    }
+                }
+            }
+        } else if (response instanceof List) {
+            for (Object item : (List<?>) response) {
+                if (item instanceof Map) {
+                    Object fieldValue = ((Map<?, ?>) item).get(fieldName);
+                    if (fieldValue != null) {
+                        values.add(fieldValue.toString());
+                    }
+                }
+            }
+        }
     }
 }
