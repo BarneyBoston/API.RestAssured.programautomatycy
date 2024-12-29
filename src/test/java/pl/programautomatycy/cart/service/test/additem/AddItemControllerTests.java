@@ -1,12 +1,8 @@
 package pl.programautomatycy.cart.service.test.additem;
 
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pl.programautomatycy.api.dto.additem.AddItemRequest;
-import pl.programautomatycy.api.utils.ResponseAssert;
-import pl.programautomatycy.api.utils.TestData;
 import pl.programautomatycy.cart.service.test.BaseRestTest;
-
 
 
 public class AddItemControllerTests extends BaseRestTest {
@@ -29,8 +25,5 @@ public class AddItemControllerTests extends BaseRestTest {
         response = controller.postAddItem(request);
     }
 
-    @Then("Assert that add item response code is {string}")
-    public void assertThatResponseCodeIs(String scenario) {
-        ResponseAssert.assertThat(response).statusCodeIs(TestData.getExpectedResponseCode(scenario));
-    }
+
 }

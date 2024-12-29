@@ -1,9 +1,6 @@
 package pl.programautomatycy.cart.service.test.calculate;
 
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pl.programautomatycy.api.utils.ResponseAssert;
-import pl.programautomatycy.api.utils.TestData;
 import pl.programautomatycy.cart.service.test.BaseRestTest;
 
 public class CalculateControllerTests extends BaseRestTest {
@@ -14,8 +11,4 @@ public class CalculateControllerTests extends BaseRestTest {
         response = controller.postCalculate(parsed);
     }
 
-    @Then("Assert that calculate response code is {string}")
-    public void assertThatResponseCodeIs(String scenario) {
-        ResponseAssert.assertThat(response).statusCodeIs(TestData.getExpectedResponseCode(scenario));
-    }
 }
